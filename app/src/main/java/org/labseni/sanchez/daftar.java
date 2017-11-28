@@ -1,7 +1,7 @@
 /*
 	Ko kodenya aku tuker daftar jadi signin
 */
-package org.labseni.idiotkyu;
+package org.labseni.sanchez;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
