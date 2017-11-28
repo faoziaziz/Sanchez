@@ -1,64 +1,99 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="org.labseni.idiotkyu.login"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="81dp">
+package org.labseni.sanchez;
 
-<AutoCompleteTextView
-        android:id="@+id/editTextEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:layout_constraintRight_creator="1"
-                tools:layout_constraintTop_creator="1"
-                tools:layout_editor_absoluteX="217dp"
-                tools:layout_editor_absoluteY="666dp" />
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-<Button
-        android:id="@+id/buttonRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Daftar"
-                tools:layout_constraintRight_creator="1"
-                tools:layout_constraintTop_creator="1"
-                tools:layout_editor_absoluteX="148dp"
-                tools:layout_editor_absoluteY="285dp" />
+public class login extends AppCompatActivity implements View.OnClickListener{
+	private Button buttonRegister;
+	private EditText editTextEmail;
+	private EditText editTextPassword;
+	private TextView textViewSignup;
+	private ProgressDialog progressDialog;
+	private FirebaseAuth firebaseAuth;
+     	
+   	@Override
+    	protected void onCreate(Bundle savedInstanceState) {
+        	super.onCreate(savedInstanceState);
+        	setContentView(R.layout.activity_login);
+		
+		firebaseAuth= FirebaseAuth.getInstance();
+ 		if(firebaseAuth.getCurrentUser()!=null)
+		{
+			//profile activity
+			finish();
+			startActivity(new Intent(getApplicationContext(), MENUUTAMA.class));
 
-<EditText
-        android:id="@+id/editTextEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Email"
-                android:inputType="textPersonName"
-                tools:layout_constraintLeft_creator="1"
-                tools:layout_constraintRight_creator="1"
-                tools:layout_constraintTop_creator="1"
-                tools:layout_editor_absoluteX="85dp"
-                tools:layout_editor_absoluteY="112dp" />
+		}
+		progressDialog= new ProgressDialog(this);
+        	buttonRegister = (Button) findViewById(R.id.t_daftar);
+		editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+		editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+		textViewSignin = (TextView) findViewById(R.id.textViewSignin)
+	
+		buttonRegister.setOnClickListener(this);
+		textViewSignin.setOnClickListener(this);
+	}
+	public void registerUser()
+	{
+		String email=editTextEmail.getText().toString().trim();
+		String password=editTextPassword.getText().toString().trim();
+		if(TextUtils.isEmpty(email))
+		{
+			//email is emty
+			Toast.makeText(this, "Silfupley, email", Toast.LENGTH_SHORT).show();
+			//stop function
+			return; 
+		}
+		if(TextUtils.isEmpty(password))
+		{
+			//password is empty
+			Toast.makeText(this, "Silfupley, password", Toast.LENGTH_SHORT).show()
+			//stopping execution furher
+			return;
+		}
+		//if valid 
+		progressDialog.setMessage("Lagi registering bro...");
+		progressDialog.show();
+		firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>(){
+	@Override
+	public void onComplete(@NonNull Task<AuthResult> task)
+	{
+		if(task.isSuccessful())
 
-<EditText
-        android:id="@+id/editTextPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPersonName"
-                tools:layout_constraintLeft_creator="1"
-                tools:layout_constraintRight_creator="1"
-                tools:layout_constraintTop_creator="1"
-                tools:layout_editor_absoluteX="85dp"
-                tools:layout_editor_absoluteY="195dp" />
+		{
 
-<TextView
-        android:id="@+id/textViewSignup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sudah punya akun ?"
-                tools:layout_editor_absoluteX="131dp"
-                tools:layout_editor_absoluteY="367dp" />
+			finish();
+			startActivity(new Intent(getApplicationContext(), MENUUTAMA.class));
 
-</android.support.constraint.ConstraintLayout>
+		}
+		else
+		{
+			Toast.makeText(MainActivity.this,"teregister gagal, coba gosok lagi", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	});
+		
+		
+	}
+	@Override
+	public void onClick(View view)
+	{
+		if(view==buttonRegister)
+		{
+			registerUser();
+		}
+		if (view==textViewSignin)
+		{
+			//open login activity
+			finish();
+			startActivity(new Intent(this, Daftar.class)
+		}
+	}
+
+}
