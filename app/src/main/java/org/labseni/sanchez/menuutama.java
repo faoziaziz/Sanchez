@@ -19,7 +19,7 @@ public class menuutama extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menuutam);
+        setContentView(R.layout.activity_menuutama);
 
         firebaseAuth=FirebaseAuth.getInstance();
 

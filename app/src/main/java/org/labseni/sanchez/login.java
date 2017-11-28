@@ -68,7 +68,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
 		{
 
 			finish();
-			startActivity(new Intent(getApplicationContext(), MENUUTAMA.class));
+			startActivity(new Intent(getApplicationContext(), menuutama.class));
 
 		}
 		else
@@ -92,7 +92,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
 		{
 			//open login activity
 			finish();
-			startActivity(new Intent(this, Daftar.class)
+			startActivity(new Intent(this, daftar.class)
 		}
 	}
 

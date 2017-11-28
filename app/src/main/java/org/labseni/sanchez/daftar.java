@@ -43,7 +43,7 @@ public class daftar extends AppCompatActivity implements View.OnClickListener{
         {
             //profile activity
             finish();
-            startActivity(new Intent(getApplicationContext(), MENUUTAMA.class));
+            startActivity(new Intent(getApplicationContext(), menuutama.class));
 
         }
 
@@ -89,7 +89,7 @@ public class daftar extends AppCompatActivity implements View.OnClickListener{
                 if(task.isSuccessful()){
                     //start the profile activity
                     finish();
-                    startActivity(new Intent(getApplicationContext(), MENUUTAMA.class));
+                    startActivity(new Intent(getApplicationContext(), menuutama.class));
                 }
             }
 
