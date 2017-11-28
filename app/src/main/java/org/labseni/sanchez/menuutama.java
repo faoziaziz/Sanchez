@@ -1,4 +1,4 @@
-package org.labseni.idiotkyu;
+package org.labseni.sanchez;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import org.labseni.sanchez.R;
 
 
 public class menuutama extends AppCompatActivity implements View.OnClickListener{
