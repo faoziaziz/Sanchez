@@ -1,5 +1,5 @@
 package org.labseni.sanchez;
-
+//ini aku rubah sedikit
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
